@@ -7,6 +7,7 @@ from configobj import ConfigObj
 from validate import Validator
 from magnet import MagNet3Frames
 
+tf.disable_v2_behavior()
 
 parser = argparse.ArgumentParser(description='')
 parser.add_argument('--phase', dest='phase', default='train',
@@ -62,7 +63,7 @@ def main(args):
     exp_name = config['exp_name']
     setproctitle.setproctitle('{}_{}_{}' \
                               .format(args.phase, network_type, exp_name))
-    tfconfig = tf.ConfigProto(allow_soft_placement=True,
+    tfconfig = tf.compat.v1.ConfigProto(allow_soft_placement=True,
                               log_device_placement=False)
     tfconfig.gpu_options.allow_growth = True
 
